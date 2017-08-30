@@ -14,4 +14,4 @@ RUN python install.py install
 
 EXPOSE 80
 
-CMD ["/opt/verynginx/openresty/nginx/sbin/nginx", "-g", "daemon off; error_log /dev/stderr info;"]
+CMD ["/etc/openresty/sn-apps/sbin/nginx", "-g", "daemon off; error_log /dev/stderr info;"]

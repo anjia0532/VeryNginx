@@ -118,15 +118,15 @@ But if you want use a nginx compiled by you self, that also ok. You can see that
 
 #### Edit nginx configuration file
 
-The configuration file of VeryNginx is `/opt/verynginx/openresty/nginx/conf/nginx.conf`, that's a demo. It just can let verynginx run so that you can see the dashboard of verynginx. If you want do something really useful, you need edit that file and add your own nginx configuration into it.
+The configuration file of VeryNginx is `/etc/openresty/sn-apps/conf/nginx.conf`, that's a demo. It just can let verynginx run so that you can see the dashboard of verynginx. If you want do something really useful, you need edit that file and add your own nginx configuration into it.
 
 >
 This configuration file add three `include` command to embeded verynginx into original nginx( openresty ) 
 
 >
-* include /opt/verynginx/verynginx/nginx_conf/in_external.conf;
-* include /opt/verynginx/verynginx/nginx_conf/in_http_block.conf;
-* include /opt/verynginx/verynginx/nginx_conf/in_server_block.conf;
+* include /etc/openresty/verynginx/verynginx/nginx_conf/in_external.conf;
+* include /etc/openresty/verynginx/verynginx/nginx_conf/in_http_block.conf;
+* include /etc/openresty/verynginx/verynginx/nginx_conf/in_server_block.conf;
 
 >These `include` command were placed outside a block, block http internal configuration, server configuration block inside, Remenber keep these three line when modifying. If you add a new Server configuration block or http configuration block, also need add suitable `include` line into it.
 
@@ -134,13 +134,13 @@ This configuration file add three `include` command to embeded verynginx into or
 
 ```
 #Start Service
-/opt/verynginx/openresty/nginx/sbin/nginx
+/etc/openresty/sn-apps/sbin/nginx
 
 #Stop Service
-/opt/verynginx/openresty/nginx/sbin/nginx -s stop
+/etc/openresty/sn-apps/sbin/nginx -s stop
 
 #Restart Service
-/opt/verynginx/openresty/nginx/sbin/nginx -s reload
+/etc/openresty/sn-apps/sbin/nginx -s reload
 
 ```
 
@@ -164,7 +164,7 @@ If you have any problems during **installation** / **configuration** / **use** ,
 
 * New configs will be effective immediately upon saving. It's not necessary to restart or reload nginx.
 
-* When you save config, VeryNginx will write all configs to `/opt/verynginx/verynginx/configs/config.json`.
+* When you save config, VeryNginx will write all configs to `/etc/openresty/verynginx/verynginx/configs/config.json`.
 
 * If the chat in status page is stuck, you can click the gear icon in the upper right corner to turn off animation
 

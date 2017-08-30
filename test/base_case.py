@@ -8,8 +8,8 @@ class Base_Case(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(Base_Case, self).__init__(*args, **kwargs)
         self.desc = "Base Case"
-        self.ngx_bin = '/opt/verynginx/openresty/nginx/sbin/nginx'
-        self.ngx_errlog = '/opt/verynginx/openresty/nginx/logs/error.log'
+        self.ngx_bin = '/etc/openresty/sn-apps/sbin/nginx'
+        self.ngx_errlog = '/etc/openresty/sn-apps/logs/error.log'
 
         self.ngx_conf_dir = None
         self.ngx_conf = None
@@ -55,9 +55,9 @@ class Base_Case(unittest.TestCase):
         self.f_ngx_errlog.seek(0,os.SEEK_END)
         
         #prepare config.json for verynginx
-        self.exec_sys_cmd('rm -rf /opt/verynginx/verynginx/configs/*')
+        self.exec_sys_cmd('rm -rf /etc/openresty/verynginx/verynginx/configs/*')
         if self.vn_conf != None:
-            self.exec_sys_cmd('cp %s/%s /opt/verynginx/verynginx/configs/config.json'%(self.vn_conf_dir, self.vn_conf))
+            self.exec_sys_cmd('cp %s/%s /etc/openresty/verynginx/verynginx/configs/config.json'%(self.vn_conf_dir, self.vn_conf))
 
         #start nginx
         self.exec_sys_cmd(self.ngx_bin + self.cfg_str())

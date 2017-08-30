@@ -12,7 +12,7 @@ class Case(base_case.Base_Case):
         r = requests.get('http://127.0.0.1')
         assert r.status_code == 200
         assert r.headers.get('content-type') == 'text/html'
-        f = open('/opt/verynginx/openresty/nginx/html/index.html', 'rb')
+        f = open('/etc/openresty/sn-apps/html/index.html', 'rb')
         index_content = f.read(1*1024*1024)
         f.close()
         assert index_content==r.content 

@@ -113,13 +113,13 @@ VeryNginx 可以自动为你安装依赖的 OpenResty，通常情况下你**没�
 
 #### 编辑 Nginx 配置文件
 
-VeryNginx 的配置文件位置为 **/opt/verynginx/openresty/nginx/conf/nginx.conf**，这是一个简单的示例文件，可以让你访问到 VeryNginx的控制面板。如果你想真正的用 VeryNginx 来做点什么，那你需要编辑这个文件，并将自己的 Nginx 配置加入到其中。
+VeryNginx 的配置文件位置为 **/etc/openresty/sn-apps/conf/nginx.conf**，这是一个简单的示例文件，可以让你访问到 VeryNginx的控制面板。如果你想真正的用 VeryNginx 来做点什么，那你需要编辑这个文件，并将自己的 Nginx 配置加入到其中。
 
 >这个配置文件在普通的 Nginx 配置文件基础上添加了三条 Include 指令来实现功能，分别为 
 >
-* include /opt/verynginx/verynginx/nginx_conf/in_external.conf;
-* include /opt/verynginx/verynginx/nginx_conf/in_http_block.conf;
-* include /opt/verynginx/verynginx/nginx_conf/in_server_block.conf;
+* include /etc/openresty/verynginx/verynginx/nginx_conf/in_external.conf;
+* include /etc/openresty/verynginx/verynginx/nginx_conf/in_http_block.conf;
+* include /etc/openresty/verynginx/verynginx/nginx_conf/in_server_block.conf;
 >
 以上三条指令分别放在 http 配置块外部，http 配置块内部，server 配置块内部，在修改时请保留这三条。如果添加了新的 Server 配置块或 http 配置块，也需要在新的块内部加入对应的 include 行。
 
@@ -129,13 +129,13 @@ VeryNginx 的配置文件位置为 **/opt/verynginx/openresty/nginx/conf/nginx.c
 
 ```
 #启动服务
-/opt/verynginx/openresty/nginx/sbin/nginx
+/etc/openresty/sn-apps/sbin/nginx
 
 #停止服务
-/opt/verynginx/openresty/nginx/sbin/nginx -s stop
+/etc/openresty/sn-apps/sbin/nginx -s stop
 
 #重启服务
-/opt/verynginx/openresty/nginx/sbin/nginx -s reload
+/etc/openresty/sn-apps/sbin/nginx -s reload
 ```
 
 
@@ -167,7 +167,7 @@ VeryNginx 按照易于使用的思想进行设计，如果你有一定的基础�
 
 * 通过 VeryNginx 控制面板保存新配置之后，会立刻生效，并不需要 restart/reload Nginx。
 
-* VeryNginx 把配置保存在 `/opt/verynginx/verynginx/configs/config.json` 里面。
+* VeryNginx 把配置保存在 `/etc/openresty/verynginx/verynginx/configs/config.json` 里面。
 
 * 状态页面图表默认带有动画效果，如果有卡顿，可以点右上角齿轮图标关掉动画效果
 

@@ -18,8 +18,8 @@ work_path = os.getcwd()
 
 def install_openresty( ):
     #check if the old version of VeryNginx installed( use upcase directory )
-    if os.path.exists('/opt/VeryNginx/VeryNginx') == True:
-        print("Seems that a old version of VeryNginx was installed in /opt/verynginx/...\nBefore install, please delete it and backup the configs if you need.")
+    if os.path.exists('/etc/openresty/verynginx/VeryNginx') == True:
+        print("Seems that a old version of VeryNginx was installed in /etc/openresty/verynginx/...\nBefore install, please delete it and backup the configs if you need.")
         sys.exit(1)
     
     #makesure the dir is clean
@@ -48,7 +48,7 @@ def install_openresty( ):
     #configure && compile && install openresty
     print('### configure openresty ...')
     os.chdir( openresty_pkg.replace('.tar.gz','') )
-    exec_sys_cmd( './configure --prefix=/opt/verynginx/openresty --user=nginx --group=nginx --with-http_v2_module --with-http_sub_module --with-http_stub_status_module --with-luajit' )
+    exec_sys_cmd( './configure --prefix=/etc/openresty/ --user=nginx --group=nginx --with-http_v2_module --with-http_sub_module --with-http_stub_status_module --with-luajit' )
     
     print('### compile openresty ...')
     exec_sys_cmd( 'make' )
@@ -61,21 +61,21 @@ def install_verynginx():
     #install VeryNginx file
     print('### copy VeryNginx files ...')
     os.chdir( work_path )
-    if os.path.exists('/opt/verynginx/') == False:
-        exec_sys_cmd( 'mkdir -p /opt/verynginx' )
+    if os.path.exists('/etc/openresty/verynginx/') == False:
+        exec_sys_cmd( 'mkdir -p /etc/openresty/verynginx' )
     
-    exec_sys_cmd( 'cp -r -f ./verynginx /opt/verynginx' )
+    exec_sys_cmd( 'cp -r -f ./verynginx /etc/openresty/verynginx' )
 
     #copy nginx config file to openresty
-    if os.path.exists('/opt/verynginx/openresty') == True:
-        if filecmp.cmp( '/opt/verynginx/openresty/nginx/conf/nginx.conf', '/opt/verynginx/openresty/nginx/conf/nginx.conf.default', False ) == True:
+    if os.path.exists('/etc/openresty/') == True:
+        if filecmp.cmp( '/etc/openresty/sn-apps/conf/nginx.conf', '/etc/openresty/sn-apps/conf/nginx.conf.default', False ) == True:
             print('cp nginx config file to openresty')
-            exec_sys_cmd( 'cp -f ./nginx.conf  /opt/verynginx/openresty/nginx/conf/' )
+            exec_sys_cmd( 'cp -f ./nginx.conf  /etc/openresty/sn-apps/conf/' )
     else:
         print( 'openresty not fount, so not copy nginx.conf' )
 
     #set mask for the path which used for save configs
-    exec_sys_cmd( 'chmod -R 777 /opt/verynginx/verynginx/configs' )
+    exec_sys_cmd( 'chmod -R 777 /etc/openresty/verynginx/verynginx/configs' )
 
 
 def update_verynginx():

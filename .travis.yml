@@ -19,11 +19,11 @@ cache:
   apt: true
   directories:
   - $HOME/.cache/pip
-  - /opt/verynginx
+  - /etc/openresty/verynginx
 
 before_install:
-  - if [ ! -d /opt/verynginx/openresty ]; then python3 install.py install openresty ; fi
-  - sudo rm -rf /opt/verynginx/verynginx  
+  - if [ ! -d /etc/openresty/ ]; then python3 install.py install openresty ; fi
+  - sudo rm -rf /etc/openresty/verynginx/verynginx  
   - sudo adduser --system --no-create-home --group nginx
 
 install:
@@ -31,9 +31,9 @@ install:
   - sudo python3 install.py install verynginx
 
 before_script:
-  - if [ ! -f /opt/verynginx/openresty/nginx/logs/error.log ]; then touch /opt/verynginx/openresty/nginx/logs/error.log;sudo chown nginx:nginx /opt/verynginx/openresty/nginx/logs/error.log ; fi
-  - sudo /opt/verynginx/openresty/nginx/sbin/nginx 
-  - sudo /opt/verynginx/openresty/nginx/sbin/nginx -s stop
+  - if [ ! -f /etc/openresty/sn-apps/logs/error.log ]; then touch /etc/openresty/sn-apps/logs/error.log;sudo chown nginx:nginx /etc/openresty/sn-apps/logs/error.log ; fi
+  - sudo /etc/openresty/sn-apps/sbin/nginx 
+  - sudo /etc/openresty/sn-apps/sbin/nginx -s stop
   - echo -e "127.0.0.1   a.vntest.com\n127.0.0.1   b.vntest.com\n127.0.0.1   c.vntest.com" | sudo tee -a /etc/hosts
 
 script:
